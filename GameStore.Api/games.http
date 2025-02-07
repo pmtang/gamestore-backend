@@ -1,0 +1,25 @@
+GET http://localhost:5174/games
+###
+GET http://localhost:5174/games/1
+###
+POST http://localhost:5174/games
+Content-Type: application/json
+
+{
+    "name": "PostI",
+    "genre": "PostI genre",
+    "price": 19.99,
+    "releasedate": "2011-01-01"
+}
+###
+PUT  http://localhost:5174/games/1
+Content-Type: application/json
+
+{
+    "name": "civilization I turbo",
+    "genre": "strategy",
+    "price": 9.99,
+    "releaseDate": "2001-01-01"
+  }
+###
+DELETE  http://localhost:5174/games/2
