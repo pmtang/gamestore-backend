@@ -16,7 +16,8 @@ public static class GamesEndpoints
     public static RouteGroupBuilder MapGamesEndpoints(this WebApplication app){
 
         //group the route
-        var group = app.MapGroup("/games");
+        var group = app.MapGroup("/games")
+                    .WithParameterValidation();
 
         //Get /games
         group.MapGet("/", () => games);
@@ -31,7 +32,13 @@ public static class GamesEndpoints
 
         //Post /games
         group.MapPost("/", (CreateGameDto newGame) => {
-            GameDto game = new(games.Count + 1, newGame.name, newGame.Genre, newGame.Price, newGame.ReleaseDate);
+            
+            //instead using the following to check -> data annotation
+            // if(string.IsNullOrEmpty(newGame.Name)){
+            //     return Results.BadRequest("Name is required");
+            // }
+
+            GameDto game = new(games.Count + 1, newGame.Name, newGame.Genre, newGame.Price, newGame.ReleaseDate);
             games.Add(game);
             return Results.CreatedAtRoute(GetGameEndpointName, new{ id = game.Id}, game);
         });
