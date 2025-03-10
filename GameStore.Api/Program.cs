@@ -10,6 +10,6 @@ var app = builder.Build();
 
 app.MapGamesEndpoints();
 
-app.MigradteDb();
+await app.MigradteDbAsync();
 
 app.Run();
